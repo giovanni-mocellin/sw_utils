@@ -808,8 +808,9 @@ In order to safely prepare a GEM test stand for a planned power cut execute:
      - Use the opportunity to power down other sensitive equipment, such as PMT's.
  2. Power down the Low Voltage.
  3. Place the µTCA modules in extraction mode:
-     - Gently pull the hot swap tab on all AMC's, including the AMC13. Wait until the blue LED stays on solid on each AMC's.
-     - Gently pull the hot swap tab on the MCH. Again, wait until the blue LED stays solid on.
+     - DO NOT pull the hot swap tab on the AMC's nor the one on the MCH
+     - Using telnet, connect to the µTCA shelf and turn OFF the AMC's one by one, including the AMC13. Wait until the blue LED stays on solid on each AMC's.
+     - Via telnet turn OFF the MCH. Again, wait until the blue LED stays solid on.
  5. Power down the µTCA crate Power Modules one at a time. Find the AC/DC converters powering the PM's and turn them off one at a time. They can either be built in the crate or external to the crate. In the first case, a switch is present on the crate front panel.
  6. Finally, power off the DAQ computer.
 
@@ -826,8 +827,8 @@ To recover a GEM test stand after a power cut execute:
      - If any of the services is not started, you can start it manually with the following command `sudo systemctl start <service name>`.
  3. Power on the µTCA crate. If the power cut was planned, undo the actions from the [previous section](#preparing-for-a-power-cut):
      - Power on the µTCA crate Power Modules one at a time.
-     - Push the hot swap tab on the MCH and wait for the blue LED to turn off.
-     - Push the hot swap tabs on the AMC's, including the AMC13, and wait for the blue LED's to turn off.
+     - Using telnet, connect to the µTCA shelf, turn ON the MCH and wait for the blue LED to turn OFF.
+     -  Via telnet turn ON all the AMC's, including the AMC13, and wait for the blue LED's to turn OFF.
  4. Enter the AMC13 tool and enable clocks to the AMC of interest by following instructions under [Enabling Clock to an AMC Slot](#enabling-clock-to-an-amc-slot),
  5. For each CTP7 login as `texas` and execute: `killall rpcsvc`
      - Right now on boot the CTP7 linux core will start `rpcsvc` as the `texas` user and this is not gauranteed to have the correct `$ENV` for the `rpcmodules` on the card.
